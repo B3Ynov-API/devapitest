@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Specy;
 use App\Models\Animal;
+use App\Models\Enclosure;
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
@@ -26,7 +27,9 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        return view('animals.create');
+        $species = Specy::all();
+        $enclosures = Enclosure::all();
+        return view('animals.create', compact ('species', 'enclosures'));
     }
 
     /**
@@ -37,8 +40,16 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        Animal::create($request->all());
-        return redirect()->back();
+        $animal = Animal::create($request->input());
+        
+        $animal->specy()->associate(Specy::find($request->specy));
+        
+        foreach($request->enclosuresCheck as $check)
+        {
+            $animal->enclosures()->attach($check);
+        }
+        $animal->save();
+        return redirect()->route('animal.index');
     }
 
     /**
@@ -47,7 +58,7 @@ class AnimalController extends Controller
      * @param  animal  $animal
      * @return \Illuminate\Http\Response
      */
-    public function show(animal $animal)
+    public function show(Animal $animal)
     {
         return view('animals.show', compact ('animal'));
     }
@@ -58,9 +69,9 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Animal $animal)
     {
-        return view('animals.edit', compact('id'));
+        return view('animals.edit', compact('animal'));
     }
 
     /**
@@ -70,12 +81,11 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Animal $animal)
     {
-        $animal = Animal::find($request->id);
         $animal->fill($request->input());
         $animal->save();
-        return redirect()->back();
+        return redirect()->route('animal.show', compact('animal'));
     }
 
     /**

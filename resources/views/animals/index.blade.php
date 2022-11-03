@@ -4,11 +4,9 @@
 
 @section('content')
 @foreach ($animals as $animal)
-    <a href='{{route('animal.show', $animal->id)}}'>{{$animal->name}}</a>
+    <p><a href='{{route('animal.show', $animal->id)}}'>{{$animal->name}}</a></p>
 @endforeach
 
-@push('script_backend')
-<!--<script>
-    alert('coucou');
-</script>-->
+<p><a href="{{route('animal.create')}}">Créer un nouvel animal</a></p>
+
 @endsection

@@ -32,14 +32,16 @@ Route::get('/animal/show/{animal}', [AnimalController::class, 'show'])
 ->where('animal', '[0-9]+')
 ->name('animal.show');
 
-Route::get('/animal/create', [AnimalController::class, 'create']);
+Route::get('/animal/create', [AnimalController::class, 'create'])
+->name('animal.create');
 Route::post('/animal', [AnimalController::class, 'store'])
-->name('store.animal');
+->name('animal.store');
 
-Route::get('/animal/edit/{id}', [AnimalController::class, 'edit']);
+Route::get('/animal/edit/{animal}', [AnimalController::class, 'edit'])
+->name('animal.edit');
 
-Route::post('/animal/update', [AnimalController::class, 'update'])
-->name('update.animal');
+Route::post('/animal/update/{animal}', [AnimalController::class, 'update'])
+->name('animal.update');
 
 Auth::routes();
 
