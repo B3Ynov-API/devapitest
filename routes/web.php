@@ -26,10 +26,11 @@ Route::get('/bonjour/{firstname}/{numero}/{lastname?}', [HomeController::class, 
 ->where('numero', '[0-9]+')
 ->name('bonjour');
 
-Route::get('/animal', [AnimalController::class, 'index']);
+Route::get('/animal', [AnimalController::class, 'index'])->name('animal.index');
 
 Route::get('/animal/show/{animal}', [AnimalController::class, 'show'])
-->where('animal', '[0-9]+');
+->where('animal', '[0-9]+')
+->name('animal.show');
 
 Route::get('/animal/create', [AnimalController::class, 'create']);
 Route::post('/animal', [AnimalController::class, 'store'])

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Specy;
-use App\Models\animal;
+use App\Models\Animal;
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
@@ -15,7 +15,8 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        return animal::all();
+        $animals = Animal::all();
+        return view('animals.index', compact('animals'));
     }
 
     /**
@@ -36,7 +37,7 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        animal::create($request->all());
+        Animal::create($request->all());
         return redirect()->back();
     }
 
@@ -48,7 +49,7 @@ class AnimalController extends Controller
      */
     public function show(animal $animal)
     {
-        return view('animals.index', compact ('animal'));
+        return view('animals.show', compact ('animal'));
     }
 
     /**
@@ -71,7 +72,7 @@ class AnimalController extends Controller
      */
     public function update(Request $request)
     {
-        $animal = animal::find($request->id);
+        $animal = Animal::find($request->id);
         $animal->fill($request->input());
         $animal->save();
         return redirect()->back();

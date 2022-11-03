@@ -1,13 +1,14 @@
 @extends('layouts.backend')
 
-@section('page_title', "Détails de l'animal")
+@section('page_title', "Liste des animaux")
 
 @section('content')
-<h1>Animal {{$animal->name}}
-<p>Description de l'animal</p>
+@foreach ($animals as $animal)
+    <a href='{{route('animal.show', $animal->id)}}'>{{$animal->name}}</a>
+@endforeach
 
 @push('script_backend')
-<script>
+<!--<script>
     alert('coucou');
-</script>
+</script>-->
 @endsection
