@@ -8,7 +8,7 @@
 @if ($animal->deathday != null)
     <p>Date de décès : {{$animal->deathday}}</p>    
 @endif
-<p>Espèce : {{$animal->specy->name}}</p>
+<p>Espèce : {{$animal->specy->name}}</p> 
 
 <h3>Cet animal est présent dans les enclos :</h3>
 @foreach ($animal->enclosures as $enclosure)

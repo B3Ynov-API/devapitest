@@ -10,7 +10,7 @@
 
     <select name="specy">
         @foreach ($species as $specy)
-            <option value="{{$specy->id}}">{{$specy->name}}</option>
+            <option value="{{$specy->id}}">{{$specy->name}}</option> 
         @endforeach
     </select>
 

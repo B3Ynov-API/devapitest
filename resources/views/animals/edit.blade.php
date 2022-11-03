@@ -6,7 +6,7 @@
 <form action="{{route('update.animal', $animal)}}" method="POST">
     @csrf
     <input type="text" name="name" value="{{$animal->name}}">
-    <input type="date" name="birthday" value="{{$animal->birthday}}">
+    <input type="date" name="birthday" value="{{$animal->birthday}}"> 
 
     <input type="submit">
 

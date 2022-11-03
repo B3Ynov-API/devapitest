@@ -8,5 +8,5 @@
 @endforeach
 
 <p><a href="{{route('animal.create')}}">Créer un nouvel animal</a></p>
-
+ 
 @endsection
