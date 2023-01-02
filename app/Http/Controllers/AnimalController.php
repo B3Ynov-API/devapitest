@@ -6,6 +6,8 @@ use App\Models\Specy;
 use App\Models\Animal;
 use App\Models\Enclosure;
 use Illuminate\Http\Request;
+use App\Mail\CreateAnimalEmail;
+use Illuminate\Support\Facades\Mail;
 
 class AnimalController extends Controller
 {
@@ -49,6 +51,10 @@ class AnimalController extends Controller
             $animal->enclosures()->attach($check);
         }
         $animal->save();
+        $animal = $animal->fresh();
+
+        Mail::to('evan.lefevre108@gmail.com')->send(new CreateAnimalEmail($animal->name));
+
         return redirect()->route('animal.index');
     }
 

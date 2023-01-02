@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SpecyController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\EnclosureController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
